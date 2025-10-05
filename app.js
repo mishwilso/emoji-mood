@@ -2,21 +2,42 @@
 const $ = (sel) => document.querySelector(sel);
 function shuffle(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]] } return arr; }
 
-// ---------- MOODS (your emoji set + silly notes + meditation links) ----------
-/*
-video: a YouTube search URL to copy. (You can replace with exact videos anytime.)
-*/
+// ---------- BODY RESET TASKS ----------
+const BODY_RESETS = [
+  "box breathing 4-4-4-4 for 1 minute",
+  "drink a full glass of water (slow sips)",
+  "shoulder rolls x10 + neck circles x5 each side",
+  "wiggle break: hands/feet/face for 30 seconds",
+  "2 minutes of calf raises + ankle circles",
+  "look 20 ft away for 20 seconds (20-20-20)",
+  "hand stretch: finger fans x10, wrist circles x10",
+  "inhale 4s → exhale 6s (1 minute)",
+  "stand up, shake it out for 30 seconds",
+  "palming: rub hands warm, cover eyes for 20 seconds"
+];
+
+// ---------- MOODS (emoji set + playful desc + mood-specific journal prompt) ----------
 const MOODS = {
-  tomato: { emoji:"🍅", name:"Pomodoro Tomato", desc:"sauce is bubbling; 25/5 then snack.", tag:"micro-bursts", video:"https://www.youtube.com/results?search_query=10+minute+focus+breathing" },
-  juice:  { emoji:"🧃", name:"Juice Box Optimist", desc:"insert silly straw slurp—tiny sugar hope.", tag:"gratitude", video:"https://www.youtube.com/results?search_query=5+minute+gratitude+meditation" },
-  snail:  { emoji:"🐌", name:"Cozy Snail", desc:"moving, but with blanket. slow = speed.", tag:"slow-move", video:"https://www.youtube.com/results?search_query=10+minute+body+scan+meditation" },
-  germ:   { emoji:"🦠", name:"Brain Germ (Overwhelm)", desc:"mental static detected; quarantine the tabs.", tag:"grounding", video:"https://www.youtube.com/results?search_query=5+minute+grounding+anxiety+meditation" },
-  vhs:    { emoji:"📼", name:"VHS Nostalgia", desc:"minecraft ost anyone?", tag:"nostalgia", video:"https://www.youtube.com/results?search_query=10+minute+nostalgic+lofi+breathing" },
-  octo:   { emoji:"🐙", name:"Octopus Ideas", desc:"eight tabs, eight dreams—pick one tentacle.", tag:"single-focus", video:"https://www.youtube.com/results?search_query=10+minute+single+point+focus+meditation" },
-  exting:{ emoji:"🧯", name:"Little Fire Extinguisher", desc:"cool down the spicy thoughts (pssst… sip water).", tag:"cool-down", video:"https://www.youtube.com/results?search_query=sitali+cooling+breath+guided" },
-  pin:    { emoji:"📌", name:"Grounded Pin", desc:"pinned to Now Board™. one thing at a time.", tag:"present", video:"https://www.youtube.com/results?search_query=5+minute+grounding+meditation" },
-  puzzle: { emoji:"🧩", name:"Puzzle Piece", desc:"something’s missing? it’s probably in the couch.", tag:"clarity", video:"https://www.youtube.com/results?search_query=10+minute+clarity+meditation" },
-  spoon:  { emoji:"🥄", name:"Tiny Spoon", desc:"spoons: limited edition—guard your energy.", tag:"rest", video:"https://www.youtube.com/results?search_query=10+minute+yoga+nidra+guided" }
+  tomato: { emoji:"🍅", name:"Pomodoro Tomato", desc:"sauce is bubbling; 25/5 then snack.", tag:"micro-bursts",
+    prompt:"What single 5-minute task would move the needle today?" },
+  juice:  { emoji:"🧃", name:"Juice Box Optimist", desc:"insert silly straw slurp—tiny sugar hope.", tag:"gratitude",
+    prompt:"Who/what gave me +1% energy? How can I thank it/them?" },
+  snail:  { emoji:"🐌", name:"Cozy Snail", desc:"moving, but with blanket. slow = speed.", tag:"slow-move",
+    prompt:"If I honor a slow pace, what still matters (and what can wait)?" },
+  germ:   { emoji:"🦠", name:"Brain Germ (Overwhelm)", desc:"mental static detected; quarantine the tabs.", tag:"grounding",
+    prompt:"Which 3 things can leave my brain right now (park, delete, or delegate)?" },
+  vhs:    { emoji:"📼", name:"VHS Nostalgia", desc:"minecraft ost anyone?", tag:"nostalgia",
+    prompt:"Borrow one comfy memory—what detail can I recreate tonight?" },
+  octo:   { emoji:"🐙", name:"Octopus Ideas", desc:"eight tabs, eight dreams—pick one tentacle.", tag:"single-focus",
+    prompt:"List today’s ideas—circle **one** to explore for 10 minutes." },
+  exting: { emoji:"🧯", name:"Little Fire Extinguisher", desc:"cool down the spicy thoughts (pssst… sip water).", tag:"cool-down",
+    prompt:"Name the flame (what emotion?) and what outcome I actually want." },
+  pin:    { emoji:"📌", name:"Grounded Pin", desc:"pinned to Now Board™. one thing at a time.", tag:"present",
+    prompt:"What are my Top 3 for tomorrow (Must / Important / Nice)?" },
+  puzzle: { emoji:"🧩", name:"Puzzle Piece", desc:"something’s missing? it’s probably in the couch.", tag:"clarity",
+    prompt:"What information am I missing? What’s the smallest next step to find it?" },
+  spoon:  { emoji:"🥄", name:"Tiny Spoon", desc:"spoons: limited edition—guard your energy.", tag:"rest",
+    prompt:"What can I drop, delay, or delegate so Future Me has a spoon left?" }
 };
 
 // ---------- QUESTION BANK (30 eclectic Qs; 4 options each -> scores) ----------
@@ -239,7 +260,7 @@ function computeResult(){
   const key = winners[Math.floor(Math.random()*winners.length)];
   return { key, ...MOODSKey(key) };
 }
-function MOODSKey(k){ // map shorthand keys used in BANK to MOODS keys
+function MOODSKey(k){
   const map = { tomato:"tomato", juice:"juice", snail:"snail", germ:"germ", vhs:"vhs",
                 octo:"octo", exting:"exting", pin:"pin", puzzle:"puzzle", spoon:"spoon" };
   return MOODS[ map[k] ];
@@ -260,6 +281,7 @@ $("#nextBtn").addEventListener("click", ()=>{
     $("#rEmoji").textContent = r.emoji;
     $("#rName").textContent  = r.name;
     $("#rDesc").textContent  = r.desc;
+    // tags
     const tags=$("#tags"); tags.innerHTML="";
     Object.keys(scores).sort((a,b)=>scores[b]-scores[a]).slice(0,3).forEach(k=>{
       const mood=MOODSKey(k);
@@ -267,20 +289,22 @@ $("#nextBtn").addEventListener("click", ()=>{
       span.textContent = `${mood.emoji} ${mood.tag}`;
       tags.appendChild(span);
     });
+    // random body reset
+    $("#bodyReset").textContent = BODY_RESETS[Math.floor(Math.random()*BODY_RESETS.length)];
+    // stash the mood-specific journal question on the copy button
+    $("#copyPromptBtn").dataset.prompt = `${r.emoji} ${r.name} — ${r.prompt || "What do I need most right now?"}`;
     $("#bar").style.width="100%";
-    // store meditation link for copy button
-    $("#copyMeditationBtn").dataset.link = r.video;
     show("#result");
   }
 });
 $("#againBtn").addEventListener("click", ()=> show("#start"));
 $("#shareBtn").addEventListener("click", async ()=>{
-  const text = `today's mood: ${$("#rEmoji").textContent} ${$("#rName").textContent}\n${$("#rDesc").textContent}`;
-  try{ await navigator.clipboard.writeText(text); alert("copied to clipboard ✨"); }
+  const text = `today's mood: ${$("#rEmoji").textContent} ${$("#rName").textContent}\n${$("#rDesc").textContent}\nBody reset: ${$("#bodyReset").textContent}`;
+  try{ await navigator.clipboard.writeText(text); }
   catch{ prompt("copy this:", text); }
 });
-$("#copyMeditationBtn").addEventListener("click", async (e)=>{
-  const link = e.currentTarget.dataset.link || "https://www.youtube.com/results?search_query=10+minute+breathing+meditation";
-  try{ await navigator.clipboard.writeText(link); alert("meditation link copied 🧘✨"); }
-  catch{ prompt("copy this:", link); }
+$("#copyPromptBtn").addEventListener("click", async (e)=>{
+  const promptText = e.currentTarget.dataset.prompt || "What do I need most right now?";
+  try{ await navigator.clipboard.writeText(promptText); }
+  catch{ prompt("copy this:", promptText); }
 });
