@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eclectic Mood Quiz (˘˘)っ━☆</title>
+  <meta name="color-scheme" content="light">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <!-- START SCREEN -->
+    <section id="start" class="screen active">
+      <div class="card">
+        <header>
+          <h1>Eclectic Mood Quiz (°˖✧)</h1>
+          <p>10 tiny deranged questions. you get one emoji mood at the end.</p>
+        </header>
+        <div class="start-controls">
+          <button id="startBtn" class="btn">Start</button>
+          <div class="footnote">Just something silly · Mish Wilson</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ SCREEN -->
+    <section id="quiz" class="screen">
+      <div class="card">
+        <div class="q-num" id="qNum">Question 1/10</div>
+        <div class="question" id="qText">…</div>
+        <form id="answers" class="answers"></form>
+        <div class="controls">
+          <button id="prevBtn" class="btn btn-ghost" type="button" aria-label="Previous">◀ Prev</button>
+          <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+          <button id="nextBtn" class="btn" type="button">Next ▶</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT SCREEN -->
+    <section id="result" class="screen">
+      <div class="card">
+        <div class="q-num">today’s nonsense mood</div>
+        <div class="result-emoji" id="rEmoji">🍅</div>
+        <div class="result-name" id="rName">Pomodoro Tomato</div>
+        <p class="result-note" id="rDesc">sauce is bubbling; 25/5 then snack.</p>
+
+        <div id="tags" class="tags"></div>
+
+        <div class="result-actions">
+          <button id="againBtn" class="btn">Again</button>
+          <button id="shareBtn" class="btn btn-blue">Copy summary</button>
+          <button id="copyMeditationBtn" class="btn btn-green">Copy meditation link</button>
+        </div>
+
+        <div class="footnote">
+          Tip: pair this with a 10-min timer + a breathing video in your Notion page.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
