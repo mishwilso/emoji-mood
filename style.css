@@ -29,7 +29,7 @@ body{
 .card{
   background:var(--card); border-radius:var(--round); box-shadow:var(--shadow);
   padding:22px; position:relative; overflow:hidden;
-  width: min(820px, 92vw);
+  width: min(640px, 92vw);
 }
 .card:before,.card:after{
   content:""; position:absolute; width:160px; height:160px; pointer-events:none; opacity:.25; filter:blur(.2px);

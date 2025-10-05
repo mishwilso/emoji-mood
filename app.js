@@ -292,7 +292,7 @@ $("#nextBtn").addEventListener("click", ()=>{
     // random body reset
     $("#bodyReset").textContent = BODY_RESETS[Math.floor(Math.random()*BODY_RESETS.length)];
     // stash the mood-specific journal question on the copy button
-    $("#copyPromptBtn").dataset.prompt = `${r.emoji} ${r.name} — ${r.prompt || "What do I need most right now?"}`;
+    // $("#copyPromptBtn").dataset.prompt = `${r.emoji} ${r.name} — ${r.prompt || "What do I need most right now?"}`;
     $("#bar").style.width="100%";
     show("#result");
   }
@@ -303,8 +303,8 @@ $("#shareBtn").addEventListener("click", async ()=>{
   try{ await navigator.clipboard.writeText(text); }
   catch{ prompt("copy this:", text); }
 });
-$("#copyPromptBtn").addEventListener("click", async (e)=>{
-  const promptText = e.currentTarget.dataset.prompt || "What do I need most right now?";
-  try{ await navigator.clipboard.writeText(promptText); }
-  catch{ prompt("copy this:", promptText); }
-});
+// $("#copyPromptBtn").addEventListener("click", async (e)=>{
+//   const promptText = e.currentTarget.dataset.prompt || "What do I need most right now?";
+//   try{ await navigator.clipboard.writeText(promptText); }
+//   catch{ prompt("copy this:", promptText); }
+// });
