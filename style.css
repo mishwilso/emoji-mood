@@ -24,7 +24,7 @@ body{
   background-attachment: fixed;
   overflow: hidden !important;
 }
-.wrap{max-width:900px; margin:10px auto 48px; padding:0 16px}
+.wrap{max-width:900px; margin:28px auto 48px; padding:0 16px}
 
 /* card + sticker corners */
 .card{

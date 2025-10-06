@@ -289,6 +289,8 @@ $("#nextBtn").addEventListener("click", ()=>{
       span.textContent = `${mood.emoji} ${mood.tag}`;
       tags.appendChild(span);
     });
+    // journal question
+    $("#journalPrompt").textContent = r.prompt || "What do I need most right now?";
     // random body reset
     $("#bodyReset").textContent = BODY_RESETS[Math.floor(Math.random()*BODY_RESETS.length)];
     // stash the mood-specific journal question on the copy button
