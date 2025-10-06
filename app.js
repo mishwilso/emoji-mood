@@ -20,23 +20,23 @@ const BODY_RESETS = [
 const MOODS = {
   tomato: { emoji:"🍅", name:"Pomodoro Tomato", desc:"sauce is bubbling; 25/5 then snack.", tag:"micro-bursts",
     prompt:"What single 5-minute task would move the needle today?" },
-  juice:  { emoji:"🧃", name:"Juice Box Optimist", desc:"insert silly straw slurp—tiny sugar hope.", tag:"gratitude",
+  juice:  { emoji:"🧃", name:"Juice Box of Joy", desc:"insert silly straw slurp—tiny sugar hope.", tag:"gratitude",
     prompt:"Who/what gave me +1% energy? How can I thank it/them?" },
-  snail:  { emoji:"🐌", name:"Cozy Snail", desc:"moving, but with blanket. slow = speed.", tag:"slow-move",
+  snail:  { emoji:"🐌", name:"Sluggish Snail", desc:"moving, but at a snails pace", tag:"slow-move",
     prompt:"If I honor a slow pace, what still matters (and what can wait)?" },
   germ:   { emoji:"🦠", name:"Brain Germ (Overwhelm)", desc:"mental static detected; quarantine the tabs.", tag:"grounding",
     prompt:"Which 3 things can leave my brain right now (park, delete, or delegate)?" },
-  vhs:    { emoji:"📼", name:"VHS Nostalgia", desc:"minecraft ost anyone?", tag:"nostalgia",
+  vhs:    { emoji:"📼", name:"VHS of my memories", desc:"minecraft ost anyone?", tag:"nostalgia",
     prompt:"Borrow one comfy memory—what detail can I recreate tonight?" },
-  octo:   { emoji:"🐙", name:"Octopus Ideas", desc:"eight tabs, eight dreams—pick one tentacle.", tag:"single-focus",
+  octo:   { emoji:"🐙", name:"Octopus Ideas", desc:"eight tabs, eight dreams, eight-", tag:"single-focus",
     prompt:"List today’s ideas—circle **one** to explore for 10 minutes." },
   exting: { emoji:"🧯", name:"Little Fire Extinguisher", desc:"cool down the spicy thoughts (pssst… sip water).", tag:"cool-down",
     prompt:"Name the flame (what emotion?) and what outcome I actually want." },
-  pin:    { emoji:"📌", name:"Grounded Pin", desc:"pinned to Now Board™. one thing at a time.", tag:"present",
+  pin:    { emoji:"📌", name:"Put a Pin in it", desc:"pinned to Now Board™. one thing at a time.", tag:"present",
     prompt:"What are my Top 3 for tomorrow (Must / Important / Nice)?" },
-  puzzle: { emoji:"🧩", name:"Puzzle Piece", desc:"something’s missing? it’s probably in the couch.", tag:"clarity",
+  puzzle: { emoji:"🧩", name:"Missing Piece", desc:"something’s missing? it’s probably in the couch.", tag:"clarity",
     prompt:"What information am I missing? What’s the smallest next step to find it?" },
-  spoon:  { emoji:"🥄", name:"Tiny Spoon", desc:"spoons: limited edition—guard your energy.", tag:"rest",
+  spoon:  { emoji:"🥄", name:"Spoon Shortage", desc:"spoons total: 0.", tag:"rest",
     prompt:"What can I drop, delay, or delegate so Future Me has a spoon left?" }
 };
 
@@ -56,11 +56,11 @@ const BANK = [
   ]},
   { q:"energy meter", a:[
     {t:"sleepy", s:["spoon"]},
-    {t:"steady", s:["pin"]},
+    {t:"rocky", s:["pin"]},
     {t:"buzzy", s:["tomato","germ"]},
-    {t:"sprouty", s:["juice"]},
+    {t:"shiny", s:["juice"]},
   ]},
-  { q:"pain pings live in my…", a:[
+  { q:"my poor old…", a:[
     {t:"knee", s:["tomato"]},
     {t:"heart", s:["puzzle"]},
     {t:"hands", s:["octo"]},
@@ -79,16 +79,16 @@ const BANK = [
     {t:"rhythm game", s:["juice","octo"]},
   ]},
   { q:"tiny treat?", a:[
-    {t:"citrus slice", s:["juice"]},
-    {t:"old song", s:["vhs"]},
-    {t:"cat video", s:["juice"]},
-    {t:"5-min leg stretch", s:["pin","spoon"]},
+    {t:"orange slice", s:["juice"]},
+    {t:"podcast episode", s:["vhs"]},
+    {t:"silly video", s:["juice"]},
+    {t:"socmed", s:["pin","spoon"]},
   ]},
   { q:"inbox is", a:[
     {t:"haunting me", s:["germ"]},
     {t:"manageable", s:["pin"]},
     {t:"ignored on purpose", s:["spoon"]},
-    {t:"sorted into piles", s:["puzzle"]},
+    {t:"checked", s:["puzzle"]},
   ]},
   { q:"choose a sticker", a:[
     {t:"🧃", s:["juice"]},
@@ -102,33 +102,33 @@ const BANK = [
     {t:"bouncy", s:["juice"]},
     {t:"smooth", s:["pin"]},
   ]},
-  { q:"pick a kaomoji", a:[
+  { q:"pick a face!", a:[
     {t:"(˘︶˘).｡*", s:["snail","spoon"]},
     {t:"(•̀ᴗ•́)و", s:["tomato"]},
     {t:"(¬_¬ )", s:["germ"]},
     {t:"(＾▽＾)", s:["juice"]},
   ]},
-  { q:"conversation luck", a:[
+  { q:"how was texting today", a:[
     {t:"replied perfectly", s:["puzzle"]},
     {t:"typed/erased x5", s:["germ"]},
-    {t:"avoided, guilt-free", s:["spoon"]},
-    {t:"shared a meme", s:["juice"]},
+    {t:"avoided", s:["spoon"]},
+    {t:"shared a ha ha", s:["juice"]},
   ]},
-  { q:"my vibe color", a:[
-    {t:"pumpkin orange", s:["juice"]},
-    {t:"electric pink", s:["tomato","germ"]},
-    {t:"sage", s:["pin"]},
-    {t:"indigo", s:["vhs"]},
+  { q:"my color", a:[
+    {t:"moss", s:["juice"]},
+    {t:"guac", s:["tomato","germ"]},
+    {t:"crocodile", s:["pin"]},
+    {t:"pistachio", s:["vhs"]},
   ]},
-  { q:"time felt", a:[
+  { q:"time felt like", a:[
     {t:"molasses", s:["spoon"]},
     {t:"flow", s:["pin"]},
-    {t:"sprint", s:["tomato"]},
-    {t:"loop", s:["vhs"]},
+    {t:"a sprint", s:["tomato"]},
+    {t:"a loop", s:["vhs"]},
   ]},
   { q:"background noise", a:[
     {t:"old playlist", s:["vhs"]},
-    {t:"podcast friends", s:["puzzle"]},
+    {t:"podcast", s:["puzzle"]},
     {t:"office/traffic", s:["germ"]},
     {t:"rain sounds", s:["snail"]},
   ]},
@@ -140,13 +140,13 @@ const BANK = [
   ]},
   { q:"if today was a house", a:[
     {t:"wonky cottage", s:["juice","snail"]},
-    {t:"neon loft", s:["germ"]},
+    {t:"cramped loft", s:["germ"]},
     {t:"library nook", s:["vhs","puzzle"]},
     {t:"sunroom", s:["snail","pin"]},
   ]},
-  { q:"snack logic", a:[
+  { q:"snack of the day", a:[
     {t:"fruit bowl", s:["juice"]},
-    {t:"nostalgia cereal", s:["vhs"]},
+    {t:"cereal", s:["vhs"]},
     {t:"whatever’s closest", s:["germ"]},
     {t:"tea first", s:["pin","spoon"]},
   ]},
@@ -166,33 +166,33 @@ const BANK = [
     {t:"don’t ask", s:["germ"]},
     {t:"ok today", s:["pin"]},
     {t:"needed the scroll", s:["spoon"]},
-    {t:"music only", s:["vhs"]},
+    {t:"music/podcasts only", s:["vhs"]},
   ]},
-  { q:"meeting style", a:[
+  { q:"choose your zoom gremlin", a:[
     {t:"camera off, blanket on", s:["spoon"]},
     {t:"host mode", s:["tomato"]},
     {t:"lurking listener", s:["vhs"]},
     {t:"emoji reactor", s:["juice","puzzle"]},
   ]},
-  { q:"desk talisman", a:[
+  { q:"desk pal", a:[
     {t:"old ticket stub", s:["vhs"]},
     {t:"tiny plant", s:["snail"]},
     {t:"sticky notes grid", s:["pin"]},
     {t:"mystery cable", s:["germ"]},
   ]},
-  { q:"micro-habit tonight", a:[
+  { q:"i should probably", a:[
     {t:"stretch 2 mins", s:["pin"]},
-    {t:"wash cup", s:["tomato"]},
+    {t:"wash dishes", s:["tomato"]},
     {t:"message someone", s:["puzzle"]},
-    {t:"play a 90s track", s:["vhs"]},
+    {t:"play some music", s:["vhs"]},
   ]},
-  { q:"dream portal", a:[
+  { q:"preferred doorway", a:[
     {t:"train window", s:["vhs"]},
     {t:"forest tunnel", s:["snail"]},
-    {t:"pixel archway", s:["germ","octo"]},
-    {t:"beaded doorway", s:["juice"]},
+    {t:"leafy archway", s:["germ","octo"]},
+    {t:"into a closet", s:["juice"]},
   ]},
-  { q:"work style today", a:[
+  { q:"how's work", a:[
     {t:"frog-eating first", s:["tomato"]},
     {t:"slow simmer", s:["pin","spoon"]},
     {t:"side quests!", s:["octo","juice"]},
@@ -210,13 +210,13 @@ const BANK = [
     {t:"glossy gradients", s:["germ"]},
     {t:"sun-faded posters", s:["vhs"]},
   ]},
-  { q:"secret superpower today", a:[
+  { q:"secret superpower of the day", a:[
     {t:"showing up anyway", s:["pin"]},
     {t:"finishing a thing", s:["tomato"]},
     {t:"noticing tiny joys", s:["juice"]},
     {t:"remembering a song", s:["vhs"]},
   ]},
-  { q:"final kaomoji vibe", a:[
+  { q:"vibe check", a:[
     {t:"( ˘ ³˘)♡", s:["puzzle","snail"]},
     {t:"(ง •̀_•́)ง", s:["tomato"]},
     {t:"(╯°□°）╯︵ ┻━┻", s:["germ"]},
